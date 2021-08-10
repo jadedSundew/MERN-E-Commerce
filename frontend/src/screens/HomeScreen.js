@@ -28,13 +28,9 @@ const HomeScreen = (props) => {
 
   useEffect(() => {
 
-
     dispatch(listProducts()); // fetching data from backend
 
     console.log(productList);
-
-   
-
 
   }, []);
 
