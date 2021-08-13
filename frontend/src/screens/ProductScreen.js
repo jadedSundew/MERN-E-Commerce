@@ -55,7 +55,7 @@ const ProductScreen = (props) => {
   }, [dispatch, productId, props]);
   
 
-console.log(props)
+// console.log(props)
 
 const addToCartHandler = () => {
   props.history.push(`/cart/${productId}?qty=${qty}`)

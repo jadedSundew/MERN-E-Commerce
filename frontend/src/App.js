@@ -18,6 +18,10 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import PageNotFound from './components/404';
 import CartScreen from './screens/CartScreen';
+import { useSelector } from 'react-redux';
+import { FaShoppingCart } from 'react-icons/fa';
+import Badge from '@material-ui/core/Badge';
+import { css, cx } from '@emotion/css';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -30,6 +34,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 function App() {
 	const [ state, setState ] = React.useState(false);
+	const cart = useSelector((state) => state.cart);
+	const { cartItems } = cart;
 
 	const toggleDrawer = (open) => (event) => {
 		if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -67,9 +73,22 @@ function App() {
 								<HiOutlineMenu />
 							</IconButton>
 
-							<Typography variant="h6" noWrap component="div">
-								Persistent drawer
+							<Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+								<Link to="/" className="brand" sx={{ flexGrow: 1 }}>
+									Thriftstore
+								</Link>
 							</Typography>
+							<Link to="/cart">
+								<Badge badgeContent={cartItems.length > 0 && cartItems.length} color="error">
+									<FaShoppingCart
+										className={css`
+											height: 1.5em;
+											width: 1.5em;
+										`}
+									/>
+								</Badge>
+							</Link>
+							<Link to="/signin">Sign In</Link>
 						</Toolbar>
 					</MuiAppBar>
 

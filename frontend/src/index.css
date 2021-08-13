@@ -16,6 +16,20 @@ body {
 	height: 100vh;
 }
 
+a {
+	color: #fff;
+	margin: 8px;
+	text-decoration: none;
+}
+
+.badge {
+	background-color: #f02020;
+	color: #ffffff;
+	border-radius: 50%;
+	padding: .2rem .7rem;
+	margin-left: .2rem;
+}
+
 h1 {
 	text-align: center;
 }

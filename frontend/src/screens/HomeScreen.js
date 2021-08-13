@@ -30,7 +30,7 @@ const HomeScreen = (props) => {
 
     console.log(productList);
 
-  }, []);
+  }, [dispatch]);
 
   console.log('error message is ' + error);
   return ( 
