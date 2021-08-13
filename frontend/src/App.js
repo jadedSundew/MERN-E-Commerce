@@ -17,6 +17,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import PageNotFound from './components/404';
+import CartScreen from './screens/CartScreen';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -80,6 +81,7 @@ function App() {
 
 					<Box id="main">
 						<Switch>
+							<Route path="/cart/:id?" component={CartScreen} />
 							<Route path="/product/:id" component={ProductScreen} />
 							<Route path="/" component={HomeScreen} exact />
 							<Route path="*">

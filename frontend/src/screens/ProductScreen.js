@@ -10,8 +10,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../components/Loading';
 import MessageBox from '../components/MessageBox'
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { detailsProduct } from '../redux/actions/productAction';
+import { NativeSelect, FormControl } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -36,7 +37,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 const ProductScreen = (props) => {
-
+  const [qty, setQty] = useState(1)
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -55,6 +56,10 @@ const ProductScreen = (props) => {
   
 
 console.log(props)
+
+const addToCartHandler = () => {
+  props.history.push(`/cart/${productId}?qty=${qty}`)
+}
 
   return ( 
 
@@ -125,14 +130,42 @@ console.log(props)
                       </div>
                   </div>
                 </li>
-                <li>
+              <li>
+                {
+                  product.countInStock > 0 && (
+
+                    <>
+                   
+                   <div className="row">
+                     <div>Qty</div>
+                     <FormControl>
+                       <NativeSelect value={qty} onChange={e => setQty(e.target.value)}>
+                       {
+                        [...Array(product.countInStock).keys()].map(el => (
+
+                          <option key={el + 1} value={el + 1}>{el + 1}</option>
+                        ))
+                      }
+                       </NativeSelect>
+                      
+                     </FormControl>
+                   </div>
+                 
+                    
+                      
                   <div className="row">
-                  <Button variant="contained">
+                  <Button variant="contained" onClick={addToCartHandler}>
                     Add To Cart
                   </Button>
                   </div>
                   
-                </li>
+                
+                    </>
+
+                  ) 
+                }
+              </li>
+                
               </ul>
 
             </CardContent>

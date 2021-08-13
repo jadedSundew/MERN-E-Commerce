@@ -123,3 +123,7 @@ a {
 	background-color: #ffe0e0ff;
 	transition-duration: 350ms;
 }
+
+.row button {
+	margin-top: 15px;
+}

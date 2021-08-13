@@ -1,10 +1,8 @@
 import Box from '@material-ui/core/Box';
-// import data from '../data';
 import Product from '../components/Product'
 import { styled } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {useEffect, useState} from 'react';
-// import axios from 'axios'
 import Loading from '../components/Loading';
 import MessageBox from '../components/MessageBox'
 import { useDispatch, useSelector } from 'react-redux';
