@@ -79,7 +79,7 @@ function App() {
 								</Link>
 							</Typography>
 							<Link to="/cart">
-								<Badge badgeContent={cartItems.length > 0 && cartItems.length} color={'error'}>
+								<Badge badgeContent={cartItems.length > 0 ? cartItems.length : 0} color={'error'}>
 									<FaShoppingCart
 										className={css`
 											height: 1.5em;
