@@ -178,3 +178,19 @@ img.small {
 	max-width: 5rem;
 	width: 100%;
 }
+
+/* FORM */
+
+.form {
+	max-width: 30rem;
+	margin: 0 auto;
+}
+.form > div {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem;
+}
+
+/* .form label {
+	margin: 1rem 0;
+}  */
