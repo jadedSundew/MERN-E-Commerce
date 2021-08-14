@@ -21,6 +21,14 @@ a {
 	margin: 8px;
 	text-decoration: none;
 }
+p {
+	margin: 0;
+}
+.min-30 a {
+	color: black;
+	text-decoration: none;
+	height: fit-content;
+}
 
 .badge {
 	background-color: #f02020;
@@ -44,15 +52,25 @@ ul {
 	list-style-type: none;
 }
 
-li {
-	margin-top: 1rem;
-}
-
-.row {
+.row-1 {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
+	align-items: flex-start;
 }
+
+.row-2 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+	/* flex-direction: column; */
+}
+
+/* 
+.row-2 div {
+	margin: 5px;
+} */
 
 .large {
 	width: 100%;
@@ -63,14 +81,34 @@ li {
 	margin-left: 30px;
 }
 
+@media (max-width: 768px) {
+	.subtotal {
+		text-align: center;
+	}
+}
+
 @media (max-width: 1024px) {
 	.col-1 {
 		margin: 0 0 20px 0;
 	}
 }
 
-a {
-	text-decoration: none;
+@media (min-width: 768px) {
+	.row.top {
+		display: flex;
+		justify-content: space-evenly;
+	}
+}
+/* .col-2 {
+	flex:
+} */
+
+.col-2 li {
+	margin: 3rem 0 3rem 0;
+}
+
+.col-2 {
+	flex: 2 1 50rem;
 }
 
 /* Loader */
@@ -138,6 +176,7 @@ a {
 	transition-duration: 350ms;
 }
 
-.row button {
-	margin-top: 15px;
+img.small {
+	max-width: 5rem;
+	width: 100%;
 }

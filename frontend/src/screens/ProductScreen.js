@@ -13,6 +13,7 @@ import MessageBox from '../components/MessageBox'
 import { useState, useEffect } from 'react';
 import { detailsProduct } from '../redux/actions/productAction';
 import { NativeSelect, FormControl } from '@material-ui/core';
+import { css, cx } from '@emotion/css';
 
 
 const useStyles = makeStyles({
@@ -82,8 +83,9 @@ const addToCartHandler = () => {
      (
       <>
       <DrawerHeader />
+
   <Link to="/">Back to Result</Link>
-    <div className="row">
+    <div className="row-1">
         <div className="col-2">
           <img className="large" src={product.image} alt={product.name}></img>       
         </div>
@@ -111,13 +113,13 @@ const addToCartHandler = () => {
             <CardContent>
               <ul>
                 <li>
-                  <div className="row">
+                  <div className="row-1">
                     <div>Price: </div>
                     <div className="price">${product.price}</div>
                   </div>
                 </li>
                 <li>
-                   <div className="row">
+                   <div className="row-1">
                     <div>Status: </div>
                     <div className="status">
                     {product.countInStock > 0 ? (<span className="success">
@@ -136,7 +138,7 @@ const addToCartHandler = () => {
 
                     <>
                    
-                   <div className="row">
+                   <div className="row-1">
                      <div>Qty</div>
                      <FormControl>
                        <NativeSelect value={qty} onChange={e => setQty(e.target.value)}>
@@ -153,8 +155,8 @@ const addToCartHandler = () => {
                  
                     
                       
-                  <div className="row">
-                  <Button variant="contained" onClick={addToCartHandler}>
+                  <div className="row-1">
+                  <Button variant="contained" onClick={addToCartHandler} sx={{marginTop: "15px"}}>
                     Add To Cart
                   </Button>
                   </div>
