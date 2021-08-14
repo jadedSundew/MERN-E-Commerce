@@ -2,6 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // express app
 
@@ -23,7 +26,16 @@ mongoose
 		});
 	});
 
+// Middleware
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// User routes
+
 app.use('/api/users', userRouter);
+
+// Product routes
 
 app.use('/api/products', productRouter);
 

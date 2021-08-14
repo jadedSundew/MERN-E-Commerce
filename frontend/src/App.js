@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 import { FaShoppingCart } from 'react-icons/fa';
 import Badge from '@material-ui/core/Badge';
 import { css, cx } from '@emotion/css';
+import SignInScreen from './screens/SignInScreen';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -100,6 +101,7 @@ function App() {
 
 					<Box id="main">
 						<Switch>
+							<Route path="/signin" component={SignInScreen} />
 							<Route path="/cart/:id?" component={CartScreen} />
 							<Route path="/product/:id" component={ProductScreen} />
 							<Route path="/" component={HomeScreen} exact />
