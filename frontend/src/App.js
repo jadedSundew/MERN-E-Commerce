@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { styled } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,11 +17,17 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import PageNotFound from './components/404';
 import CartScreen from './screens/CartScreen';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaShoppingCart } from 'react-icons/fa';
 import Badge from '@material-ui/core/Badge';
 import { css, cx } from '@emotion/css';
 import SignInScreen from './screens/SignInScreen';
+import { BsCaretDownFill } from 'react-icons/bs';
+import { signOut } from './redux/actions/userAction';
+
+import Dropdown from './components/Dropdown';
+import DropIcon from './components/DropIcon';
+import MinimalSelect from './components/Dropdown';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -37,6 +42,9 @@ function App() {
 	const [ state, setState ] = React.useState(false);
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
+	const dispatch = useDispatch();
+	const userSignIn = useSelector((state) => state.userSignIn);
+	const { userInfo } = userSignIn;
 
 	const toggleDrawer = (open) => (event) => {
 		if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -44,6 +52,11 @@ function App() {
 		}
 
 		setState(open);
+	};
+
+	const signOutHandler = () => {
+		console.log('sign out clicked');
+		dispatch(signOut());
 	};
 
 	const list = () => (
@@ -76,7 +89,7 @@ function App() {
 
 							<Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
 								<Link to="/" className="brand" sx={{ flexGrow: 1 }}>
-									Thriftstore
+									Thriftshop
 								</Link>
 							</Typography>
 							<Link to="/cart">
@@ -89,7 +102,42 @@ function App() {
 									/>
 								</Badge>
 							</Link>
-							<Link to="/signin">Sign In</Link>
+							{userInfo ? (
+								<DropIcon username={userInfo.name} icon={<BsCaretDownFill />}>
+									<Dropdown signOutHandler={signOutHandler}>
+										{/* <Link to="#signout" onClick={signOutHandler}>
+											Sign Out
+										</Link> */}
+									</Dropdown>
+								</DropIcon>
+							) : (
+								<Link to="/signin">Sign In</Link>
+							)}
+
+							{/* <Link to="/signin">
+								{userInfo ? (
+									<div className="dropdown">
+										<Link
+											to="#"
+											className={css`
+												display: flex;
+												justify-content: center;
+												align-items: center;
+											`}
+										>
+											<h3 className={css`margin: 0;`}>{userInfo.name}</h3>{' '}
+											<BsCaretDownFill className={css`margin-left: 6px;`} />
+										</Link>
+										<ul className="dropdown-content">
+											<Link to="#signout" onClick={signOutHandler}>
+												Sign Out
+											</Link>
+										</ul>
+									</div>
+								) : (
+									<Link to="/signin">Sign In</Link>
+								)}
+							</Link> */}
 						</Toolbar>
 					</MuiAppBar>
 
