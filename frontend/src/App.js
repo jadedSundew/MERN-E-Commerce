@@ -50,6 +50,11 @@ function App() {
 		setState(open);
 	};
 
+	const signOutHandler = () => {
+		console.log('sign out clicked');
+		dispatch(signOut());
+	};
+
 	const list = () => (
 		<Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
 			<List>
