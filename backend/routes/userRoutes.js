@@ -39,3 +39,48 @@ userRouter.post(
 );
 
 export default userRouter;
+
+userRouter.post(
+	'/register',
+	expressAsyncHandler(async (req, res) => {
+		let user = await User.findOne({ email: req.body.email });
+		if (user) {
+			if (bcrypt.compare(req.body.email, user.email)) {
+				res.status(401).send({ message: 'Email already in use.' });
+			}
+		} else {
+			user = new User({
+				name: req.body.name,
+				email: req.body.email,
+				password: bcrypt.hashSync(req.body.password, 8)
+			});
+
+			const createdNewUser = await user.save();
+
+			res.send({
+				_id: createdNewUser._id,
+				name: createdNewUser.name,
+				email: createdNewUser.email,
+				isAdmin: createdNewUser.isAdmin,
+				token: generateToken(createdNewUser)
+			});
+		}
+	})
+);
+
+// 	const user = new User({
+// 		name: req.body.name,
+// 		email: req.body.email,
+// 		password: bcrypt.hashSync(req.body.password, 8)
+// 	});
+
+// 	const createdNewUser = await user.save();
+
+// 	res.send({
+// 		_id: createdNewUser._id,
+// 		name: createdNewUser.name,
+// 		email: createdNewUser.email,
+// 		isAdmin: createdNewUser.isAdmin,
+// 		token: generateToken(createdNewUser)
+// 	});
+// })

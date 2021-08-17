@@ -23,12 +23,11 @@ const SignInScreen = (props) => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 
-	const dispatch = useDispatch();
-
 	const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
 	const userSignIn = useSelector((state) => state.userSignIn);
 	const { userInfo, loading, error } = userSignIn;
+	const dispatch = useDispatch();
 
 	useEffect(
 		() => {
@@ -83,7 +82,7 @@ const SignInScreen = (props) => {
 					<div>
 						New customer?
 						<Link
-							to="/register"
+							to={`/register?redirect=${redirect}`}
 							className={css`
 								color: #2196f3;
 								&:hover {

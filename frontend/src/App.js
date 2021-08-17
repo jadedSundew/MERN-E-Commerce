@@ -17,6 +17,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import PageNotFound from './components/404';
 import CartScreen from './screens/CartScreen';
+import RegisterScreen from './screens/RegisterScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaShoppingCart } from 'react-icons/fa';
 import Badge from '@material-ui/core/Badge';
@@ -24,6 +25,7 @@ import { css, cx } from '@emotion/css';
 import SignInScreen from './screens/SignInScreen';
 import { signOut } from './redux/actions/userAction';
 import Dropdown from './components/Dropdown';
+import ShippingScreen from './screens/ShippingScreen';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -48,11 +50,6 @@ function App() {
 		}
 
 		setState(open);
-	};
-
-	const signOutHandler = () => {
-		console.log('sign out clicked');
-		dispatch(signOut());
 	};
 
 	const list = () => (
@@ -119,6 +116,8 @@ function App() {
 
 					<Box id="main">
 						<Switch>
+							<Route path="/shipping" component={ShippingScreen} />
+							<Route path="/register" component={RegisterScreen} />
 							<Route path="/signin" component={SignInScreen} />
 							<Route path="/cart/:id?" component={CartScreen} />
 							<Route path="/product/:id" component={ProductScreen} />

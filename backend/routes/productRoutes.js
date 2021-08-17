@@ -6,6 +6,15 @@ import Product from '../models/productModel.js';
 
 const productRouter = express.Router();
 
+productRouter.get(
+	'/seed',
+	expressAsyncHandler(async (req, res) => {
+		// await Product.deleteMany({});
+		const createdProducts = await Product.insertMany(data.products);
+		res.send({ createdProducts });
+	})
+);
+
 // api to list all products on frontend
 
 productRouter.get(
@@ -15,15 +24,6 @@ productRouter.get(
     docs from Product collection*/
 
 		res.send(products);
-	})
-);
-
-productRouter.get(
-	'/seed',
-	expressAsyncHandler(async (req, res) => {
-		// await Product.deleteMany({});
-		const createdProducts = await Product.insertMany(data.products);
-		res.send({ createdProducts });
 	})
 );
 
