@@ -26,6 +26,7 @@ import SignInScreen from './screens/SignInScreen';
 import { signOut } from './redux/actions/userAction';
 import Dropdown from './components/Dropdown';
 import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreeen from './screens/PaymentScreen';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -116,6 +117,7 @@ function App() {
 
 					<Box id="main">
 						<Switch>
+							<Route path="/payment" component={PaymentScreeen} />
 							<Route path="/shipping" component={ShippingScreen} />
 							<Route path="/register" component={RegisterScreen} />
 							<Route path="/signin" component={SignInScreen} />
