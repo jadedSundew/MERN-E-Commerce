@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 		padding: '1rem'
 	},
 	media: {
-		height: 420
+		height: 200
 	}
 });
 
@@ -126,7 +126,7 @@ const CartScreen = (props) => {
 					)}
 				</div>
 				<div className="card">
-					<Card className={classes.root}>
+					<Card className={(classes.root, classes.media)}>
 						<CardContent>
 							<ul>
 								<li>
