@@ -2,6 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import { isAuth } from '../utils.js';
+import morgan from 'morgan';
 
 const orderRouter = express.Router();
 
@@ -10,7 +11,7 @@ orderRouter.post(
 	isAuth,
 	expressAsyncHandler(async (req, res) => {
 		if (req.body.orderItems.length === 0) {
-			res.status(404).send({ message: 'Cart is empty.' });
+			res.status(400).send({ message: 'Cart is empty' });
 		} else {
 			const order = new Order({
 				orderItems: req.body.orderItems,
@@ -22,9 +23,9 @@ orderRouter.post(
 				totalPrice: req.body.totalPrice,
 				user: req.user._id
 			});
-
 			const createdOrder = await order.save();
 			res.status(201).send({ message: 'New Order Created', order: createdOrder });
+			res.send(JSON.stringify(req.body));
 		}
 	})
 );

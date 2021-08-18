@@ -49,8 +49,6 @@ const ShippingScreen = (props) => {
 					</h2>
 				</div>
 
-				{/* {error && <MessageBox variant="danger">{error}</MessageBox>} */}
-
 				<div>
 					<TextField
 						type="text"

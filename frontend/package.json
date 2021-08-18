@@ -10,6 +10,7 @@
 		"@emotion/styled": "^11.3.0",
 		"@material-ui/core": "next",
 		"@material-ui/icons": "^4.11.2",
+		"@material-ui/lab": "^4.0.0-alpha.60",
 		"@material-ui/styles": "^4.11.4",
 		"@mui-treasury/styles": "^1.13.1",
 		"@testing-library/jest-dom": "^5.11.4",

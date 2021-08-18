@@ -4,6 +4,7 @@ import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import dotenv from 'dotenv';
 import orderRouter from './routes/orderRoutes.js';
+import morgan from 'morgan';
 
 dotenv.config();
 
@@ -31,17 +32,12 @@ mongoose
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
-// User routes
+// Routes
 
 app.use('/api/users', userRouter);
-
-// Product routes
-
 app.use('/api/products', productRouter);
-
-// Order routes
-
 app.use('/api/orders', orderRouter);
 
 app.get('/', (req, res) => {

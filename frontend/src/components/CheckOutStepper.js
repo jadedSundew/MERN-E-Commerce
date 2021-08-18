@@ -25,10 +25,7 @@ const CheckOutStepper = (props) => {
 			<Stepper activeStep={props.step} alternativeLabel>
 				{steps.map((label) => (
 					<Step key={label}>
-						<StepLabel className={css`font-weight: 500;`}>
-							{/* <p className={css`font-weight: 900;`}>{label}</p> */}
-							{label}
-						</StepLabel>
+						<StepLabel className={css`font-weight: 500;`}>{label}</StepLabel>
 					</Step>
 				))}
 			</Stepper>

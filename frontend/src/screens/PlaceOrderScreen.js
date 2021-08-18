@@ -5,9 +5,14 @@ import { makeStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import { css, cx } from '@emotion/css';
 import CheckOutStepper from '../components/CheckOutStepper';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { NativeSelect, FormControl } from '@material-ui/core';
+import { createOrder } from '../redux/actions/orderActions';
+import { useEffect } from 'react';
+import { ORDER_CREATE_RESET } from '../redux/constants/orderConstants';
+import Loading from '../components/Loading';
+import MessageBox from '../components/MessageBox';
 
 const useStyles = makeStyles({
 	root: {
@@ -29,28 +34,35 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const PlaceOrderScreen = (props) => {
-	const classes = useStyles();
-
 	const cart = useSelector((state) => state.cart);
-
 	if (!cart.paymentMethod) {
 		props.history.push('/payment');
 	}
+	const orderCreate = useSelector((state) => state.orderCreate);
+	const { loading, success, error, order } = orderCreate;
 
-	const toPrice = (num) => Number(num.toFixed(2));
-
+	const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
 	cart.itemsPrice = toPrice(cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0));
-
 	cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-
 	cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-
 	cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
+	const dispatch = useDispatch();
 	const placeOrderHandler = () => {
-		//TODO: dispatch place order action
-		return null;
+		dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
 	};
+	useEffect(
+		() => {
+			if (success) {
+				props.history.push(`/order/${order._id}`);
+				dispatch({ type: ORDER_CREATE_RESET });
+			}
+		},
+		[ dispatch, order, props.history, success ]
+	);
+
+	console.log('hi');
+	console.log(cart.cartItems);
 
 	return (
 		<div>
@@ -253,6 +265,7 @@ const PlaceOrderScreen = (props) => {
 								</div>
 							</li>
 						</ul>
+
 						<div
 							className={css`
 								display: flex;
@@ -268,6 +281,9 @@ const PlaceOrderScreen = (props) => {
 							>
 								Place Order
 							</Button>
+						</div>
+						<div className={css`margin-top: 10px;`}>
+							{error && <MessageBox variant="danger">{error}</MessageBox>}
 						</div>
 					</Card>
 				</div>

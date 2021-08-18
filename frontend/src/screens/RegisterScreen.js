@@ -36,7 +36,6 @@ const RegisterScreen = (props) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (password !== confirmPassword) {
-			// return alert('Passwords do not match!');
 			setIsError(true);
 		} else {
 			dispatch(register(name, email, password));
@@ -60,8 +59,8 @@ const RegisterScreen = (props) => {
 					<h1>Register</h1>
 				</div>
 
-				{/* {error && <MessageBox variant="danger">{error}</MessageBox>} */}
-				{/* {userInfo.email === email ? <MessageBox variant="danger">{error}</MessageBox> : null} */}
+				{error && <MessageBox variant="danger">{error}</MessageBox>}
+
 				<div>
 					<TextField
 						type="text"

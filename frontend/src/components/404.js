@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { styled } from '@material-ui/core/styles';
+import { css, cx } from '@emotion/css';
+
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
 	alignItems: 'center',
@@ -16,7 +18,14 @@ const PageNotFound = () => {
 		<div>
 			<DrawerHeader />
 			<DrawerHeader />
-			<h1>No Match for {pathname.pathname}</h1>
+			<h2
+				className={css`
+					word-break: break-all;
+					text-align: center;
+				`}
+			>
+				No Match for {pathname.pathname}
+			</h2>
 		</div>
 	);
 };
