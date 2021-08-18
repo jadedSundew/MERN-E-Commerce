@@ -4,11 +4,12 @@ import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
 import { styled } from '@material-ui/core/styles';
 import { useState, useEffect } from 'react';
-import { css, cx } from '@emotion/css';
 import { useDispatch, useSelector } from 'react-redux';
-import { signIn } from '../redux/actions/userAction';
+import { register } from '../redux/actions/userAction';
 import Loading from '../components/Loading';
 import MessageBox from '../components/MessageBox';
+import { css, cx } from '@emotion/css';
+import Alert from '@material-ui/core/Alert';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -19,41 +20,58 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end'
 }));
 
-const SignInScreen = (props) => {
+const RegisterScreen = (props) => {
+	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
+	const [ confirmPassword, setConfirmPassword ] = useState('');
+	const [ isError, setIsError ] = useState(false);
 
 	const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-	const userSignIn = useSelector((state) => state.userSignIn);
-	const { userInfo, loading, error } = userSignIn;
+	const userRegister = useSelector((state) => state.userRegister);
+	const { userInfo, loading, error } = userRegister;
 	const dispatch = useDispatch();
+
+	const submitHandler = (e) => {
+		e.preventDefault();
+		if (password !== confirmPassword) {
+			// return alert('Passwords do not match!');
+			setIsError(true);
+		} else {
+			dispatch(register(name, email, password));
+		}
+	};
 
 	useEffect(
 		() => {
-			if (userInfo) {
-				props.history.push(redirect);
-			}
+			if (userInfo) props.history.push(redirect);
 		},
 		[ props.history, redirect, userInfo ]
 	);
 
-	const submitHandler = (e) => {
-		e.preventDefault();
-
-		dispatch(signIn(email, password));
-	};
-
 	console.log('SignInScreen:', props.location.search.split('=')[1]);
-	console.log('Redirect', redirect);
+
 	return (
 		<Box>
 			<DrawerHeader />
 			<form className="form" onSubmit={submitHandler}>
 				<div>
-					<h1>Sign In</h1>
+					<h1>Register</h1>
 				</div>
-				{error && <MessageBox variant="danger">{error}</MessageBox>}
+
+				{/* {error && <MessageBox variant="danger">{error}</MessageBox>} */}
+				{/* {userInfo.email === email ? <MessageBox variant="danger">{error}</MessageBox> : null} */}
+				<div>
+					<TextField
+						type="text"
+						id="name"
+						label="Name"
+						variant="filled"
+						onChange={(e) => setName(e.target.value)}
+					/>
+				</div>
+
 				<div>
 					<TextField
 						type="email"
@@ -73,17 +91,28 @@ const SignInScreen = (props) => {
 					/>
 				</div>
 				<div>
+					<TextField
+						error={isError ? true : false}
+						type="password"
+						id="confirm-password"
+						label="Confirm Password"
+						helperText={isError ? 'Password not matching' : null}
+						variant="filled"
+						onChange={(e) => setConfirmPassword(e.target.value)}
+					/>
+				</div>
+				<div>
 					<label />
 					<Button variant="contained" type="submit">
-						Sign In
+						Register
 					</Button>
 				</div>
 				<div>
 					<label />
 					<div>
-						New customer?
+						Already have an account?{' '}
 						<Link
-							to={`/register?redirect=${redirect}`}
+							to={`/signin?redirect=${redirect}`}
 							className={css`
 								color: #2196f3;
 								&:hover {
@@ -91,7 +120,7 @@ const SignInScreen = (props) => {
 								}
 							`}
 						>
-							Create an account.
+							Sign in.
 						</Link>
 					</div>
 				</div>
@@ -100,4 +129,4 @@ const SignInScreen = (props) => {
 	);
 };
 
-export default SignInScreen;
+export default RegisterScreen;
