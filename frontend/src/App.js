@@ -28,6 +28,7 @@ import Dropdown from './components/Dropdown';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreeen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -125,6 +126,7 @@ function App() {
 							<Route path="/placeorder" component={PlaceOrderScreen} />
 							<Route path="/cart/:id?" component={CartScreen} />
 							<Route path="/product/:id" component={ProductScreen} />
+							<Route path="/order/:id" component={OrderScreen} />
 							<Route path="/" component={HomeScreen} exact />
 							<Route path="*">
 								<PageNotFound />
