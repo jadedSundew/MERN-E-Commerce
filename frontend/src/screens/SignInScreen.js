@@ -45,6 +45,7 @@ const SignInScreen = (props) => {
 	};
 
 	console.log('SignInScreen:', props.location.search.split('=')[1]);
+	console.log('Redirect', redirect);
 	return (
 		<Box>
 			<DrawerHeader />

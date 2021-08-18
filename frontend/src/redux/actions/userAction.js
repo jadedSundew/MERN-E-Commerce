@@ -63,5 +63,5 @@ export const signOut = () => (dispatch) => {
 		type: USER_SIGNOUT
 	});
 	// document.location.href = '/signin';
-	document.location.href = '#signin';
+	// document.location.href = '#signin';
 };

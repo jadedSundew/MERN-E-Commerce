@@ -118,11 +118,11 @@ function App() {
 
 					<Box id="main">
 						<Switch>
-							<Route path="/placeorder" component={PlaceOrderScreen} />
-							<Route path="/payment" component={PaymentScreeen} />
-							<Route path="/shipping" component={ShippingScreen} />
-							<Route path="/register" component={RegisterScreen} />
 							<Route path="/signin" component={SignInScreen} />
+							<Route path="/register" component={RegisterScreen} />
+							<Route path="/shipping" component={ShippingScreen} />
+							<Route path="/payment" component={PaymentScreeen} />
+							<Route path="/placeorder" component={PlaceOrderScreen} />
 							<Route path="/cart/:id?" component={CartScreen} />
 							<Route path="/product/:id" component={ProductScreen} />
 							<Route path="/" component={HomeScreen} exact />
